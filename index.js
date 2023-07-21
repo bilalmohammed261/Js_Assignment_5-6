@@ -17,11 +17,18 @@ class Car{
         console.log(`Brand: ${this.brand}  Model: ${this.model}  Year:${this.year}  Color:${this.color} Price:${this.price}$ Gas: ${this.gas}`);
     }
 
-    race(i,today)
+    race(today)
     {
-        
         this.gas -= 5 + (today.getFullYear()-this.year);
+        if(this.gas<0)
+        {
+            this.gas = 0;
+        }
         console.log(`${this.brand} car has ${this.gas} gas value`);
+        let paraEl = document.createElement("p");
+        paraEl.textContent = `${this.brand} car has ${this.gas} gas value`;
+        resultContainerEl.appendChild(paraEl);
+        
     }
 
     
@@ -51,12 +58,18 @@ for(let obj of objectsArray)
 
  let today = new Date();
  let turns = 7;
+ let resultContainerEl = document.getElementById("resultsContainer");
+
+
  for(let i=0;i<turns;i++)
  {
     console.log(`After turn ${i+1}`);
+    let turnElement = document.createElement("h1");
+    turnElement.textContent = `After turn ${i+1}`;
+    resultContainerEl.appendChild(turnElement);
     for(let j=0;j<objectsArray.length;j++)
     {
-       objectsArray[j].race(i,today);
+       objectsArray[j].race(today);
     }
  }
 
